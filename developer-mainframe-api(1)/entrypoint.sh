@@ -1,0 +1,2 @@
+#!/bin/bash
+java -XX:+UseShenandoahGC -XX:+UnlockExperimentalVMOptions -XX:ShenandoahUncommitDelay=1000 -XX:ShenandoahGuaranteedGCInterval=10000 $2 -cp $APP_PATH/$JAR_FILE -Dloader.path=$APP_PATH/lib org.springframework.boot.loader.launch.PropertiesLauncher $1

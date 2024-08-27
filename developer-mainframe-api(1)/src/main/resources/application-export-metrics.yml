@@ -1,0 +1,14 @@
+management:
+  metrics:
+    export:
+      prometheus:
+        pushgateway:
+          enabled: true
+          base-url: ${OL_HUB_PUSHGATEWAY_HOST:http://localhost:9091}
+          job: nocode
+          shutdown-operation: push
+          grouping-key:
+            tenantId: ${OL_HUB_TENANT_ID:4a6bfc5d-3bae-45a3-99b9-d1e255875adb}
+            project: ${OL_HUB_PROJECT_NAME:undefined}:${OL_HUB_PROJECT_VERSION:0}
+            environment: ${OL_HUB_ENVIRONMENT:undefined}
+            instance : ${OL_HUB_INSTANCE:undefined}

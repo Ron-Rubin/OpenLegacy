@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <springProfile name="plain-logs">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+      </encoder>
+    </appender>
+
+    <root level="INFO">
+      <appender-ref ref="STDOUT"/>
+    </root>
+  </springProfile>
+
+  <springProfile name="!plain-logs">
+    <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+      <layout class="ch.qos.logback.contrib.json.classic.JsonLayout"
+              complete="false"
+              compact="true"
+              eventEol="true"
+              objectMessageAsJsonObject="true"
+              stacktraceAsString="true"
+              includeStacktrace="true"
+              properties="true"
+              propertiesAsList="true"
+      >
+        <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter"></jsonFormatter>
+        <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
+        <appendLineSeparator>true</appendLineSeparator>
+      </layout>
+    </appender>
+
+    <root level="INFO">
+      <appender-ref ref="json"/>
+    </root>
+  </springProfile>
+
+  <springProfile name="export-logs">
+    <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
+      <http>
+        <url>${OL_HUB_LOKI_HOST:-http://localhost:3100}/loki/api/v1/push</url>
+      </http>
+      <format>
+        <label>
+          <pattern>tenantId=${OL_HUB_TENANT_ID:-4a6bfc5d-3bae-45a3-99b9-d1e255875adb},environment=${OL_HUB_ENVIRONMENT:-undefined},project=${OL_HUB_PROJECT_NAME:-undefined}:${OL_HUB_PROJECT_VERSION:-0},instance=${OL_HUB_INSTANCE:-undefined},host=${HOSTNAME},level=%level</pattern>
+        </label>
+        <message>
+          <pattern>l=%level h=${HOSTNAME} c=%logger{20} t=%thread | %msg %ex</pattern>
+        </message>
+        <sortByTime>true</sortByTime>
+      </format>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+      </encoder>
+    </appender>
+
+    <root level="INFO">
+      <appender-ref ref="LOKI"/>
+    </root>
+  </springProfile>
+</configuration>

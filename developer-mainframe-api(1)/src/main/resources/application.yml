@@ -1,0 +1,31 @@
+# Enable to include message property in default response error model
+#server:
+#  error:
+#    include-message: always
+
+# Push logs and metrics profile to the monitoring service
+#spring:
+#  profiles:
+#    active: export-logs, export-metrics
+
+ol:
+  license:
+    key: eyJhbGciOiJSUzI1NiJ9.eyJwcm9kdWN0Ijoib3BlbmxlZ2FjeS1jb3JlIiwic3ViIjoib2wtaHViIiwiaXNzdWVkX2F0IjoiMjAyNC0wOC0xOVQwNzo0Mjo0Ny4xNzJaIiwidmFsaWRfZm9yIjo2MCwiZXhwaXJ5X2RhdGUiOiIyMDI0LTEwLTE4VDA3OjQyOjQ3LjE3MloiLCJjdXN0b21lcl9uYW1lIjoib2wtdGVzdCIsImN1c3RvbWVyX3R5cGUiOiJUUklBTCIsImxpY2Vuc2VfdHlwZSI6IkRFVkVMT1BNRU5UIiwib2JqZWN0X2xpbWl0cyI6eyJtZXRob2RzIjoyMCwicHJlbWl1bU1ldGhvZHMiOjIwfSwiY29ubmVjdG9ycyI6WyIqIl19.eHdCqgnvah7LlAABKTTk3dIHnphM7hSYAouxDZE6hiYkoLU5sdWleitGLK5N4Vx9AAMZV9zj8rV33hGDBtdl_XJ9OGx8YwGDGCaX7HMXnHwCMPF-ojeACEDrFFzRTGryUzmbNEjhjrAttHKDOIIROQycsDP-Ek-EQyx2QFhiPRsZnZjsDSjvAc5ToleUE1MuuDq93nXtufsMDcEQ5ziQazpYJ65HZwtEsptHp7lvl_NyhZeTWbnbH5CLEgqxVWD3FA-0DObLiJ_408XjAB5VeRUt50CxMhpNJRfUZWcBV9VY6XMm739OAszz_yq4QQz9m2lnuRH8whzTNArkQZ5z9A
+  flow:
+    type: RPC
+    source-provider: HUB
+    hub:
+      url: http://localhost:8080
+      api-key: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiIwZmFmYzc3ZS1jMmVmLTQ2ZjYtOGI0MS1kZjU5MmI1Y2NmODAiLCJ0aWQiOiI0YTZiZmM1ZC0zYmFlLTQ1YTMtOTliOS1kMWUyNTU4NzVhZGIiLCJodHRwczovL29sLnRlbmFudHMvcmVnaW9uIjoiT05fUFJFTSIsImlhdCI6MTcyNDc1NDE3NywiaXNzIjoib2wiLCJzdWIiOiIifQ.KNZcxHgKSzNmcMbWrbvbnKcu4Aa2US-3DitfeCYx-j9oxZyIidlEPsXcWOx5901F4XWCapFtT3286yXKvPHZ5KiZCS5GasOePLHRlpiQ2EBaUWcbT-JLxP70M6RRLRbDTmHJCzGG7tM2DW-RU_U20C6rWiR3tGl-jGRAtxfi9UofYrmwuAQ-kMjH78t32ZvYeaHX5OHnzfvCqm1rUYTndfElAScUodP3zANvKcb9cUSd1MH1oi4F6rrafHn3HENg_QEy7WPd04TKHNzXrRd7kK7ZDYlorJERn_SI1XvtsCixUdH0geYMYpX0KsJpGLheXjbYQiP3Im_6LL9W_O_uag
+      project-name: developer-mainframe-api
+    agent:
+      enabled: false
+#   profiles:
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - prometheus
+
